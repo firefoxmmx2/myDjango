@@ -17,13 +17,13 @@ class Rdrjbxx(models.Model):
     ssx=models.CharField(max_length=6)
     xxdz=models.CharField(max_length=120)
     lxdh=models.CharField(max_length=20)
-    gddh=models.CharField(max_length=20,blank=True)
+    gddh=models.CharField(max_length=20,blank=True,null=True)
     dw=models.CharField(max_length=60)
 
 class Jdpxx(models.Model):
     '''寄递品信息'''
     jdplx=models.CharField(max_length=3)
-    jdpmc=models.CharField(max_length=120,blank=True)
+    jdpmc=models.CharField(max_length=120,blank=True,null=True)
     jdpsm=models.IntegerField(max_length=10)
     ljjbxx=models.ForeignKey("Ljjbxx")
 class Ljjbxx(models.Model):
@@ -34,7 +34,7 @@ class Ljjbxx(models.Model):
     ljr=models.ForeignKey(Qyryjbxx)
     ljsj=models.DateField()
     ljtbsj=models.DateField()
-    lttbr=models.ForeignKey(User)
+    lttbr=models.ForeignKey(User,)
 class Pjjbxx(models.Model):
     '''派件基本信息'''
     ljjbxx=models.ForeignKey(Ljjbxx)
@@ -45,4 +45,14 @@ class Pjjbxx(models.Model):
     pjsj=models.DateField()
     pjtbr=models.ForeignKey(Qyryjbxx,related_name="+")
     pjtbsj=models.DateField()
+
+class Kyjdwpxx(models.Model):
+    '''可疑寄递物品信息'''
+    kyywdjxh=models.CharField(max_length=24)
+    kdywdjxh=models.CharField(max_length=24)
+    wldh=models.CharField(max_length=40)
+    kywpms=models.CharField(max_length=120)
+    kywplb=models.CharField(max_length=2)
+    bgr=models.ForeignKey(Qyryjbxx,related_name='bgr_set')
+    bgsj=models.DateField(blank=True,null=True)
     
