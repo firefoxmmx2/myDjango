@@ -8,7 +8,7 @@ class Publisher(models.Model):
     city = models.CharField(max_length=60)
     state_province = models.CharField(max_length=30)
     country = models.CharField(max_length=50)
-    website = models.URLField()
+    website = models.URLField(blank=True)
     
     def __unicode__(self):
         return self.name
@@ -28,7 +28,7 @@ class Book(models.Model):
     title = models.CharField(max_length=100)
     authors = models.ManyToManyField(Author)
     publisher = models.ForeignKey(Publisher)
-    publication_date = models.DateField()
+    publication_date = models.DateField(blank=True)
     
     def __unicode__(self):
         return self.title
