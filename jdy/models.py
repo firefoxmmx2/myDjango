@@ -52,8 +52,7 @@ class Pjjbxx(models.Model):
 class Kyjdwpxx(models.Model):
     '''可疑寄递物品信息'''
     kyywdjxh=models.CharField(max_length=24) #可疑业务登记序号 主键
-    kdywdjxh=models.CharField(max_length=24) #快递业务登记序号 （还需要确认 ）
-    wldh=models.CharField(max_length=40) #物流单号 如果上面的 快递业务登记序号 是 揽件信息的话，这里这个物流单号就不需要了
+    wldh=models.CharField(max_length=40) #物流单号
     kywpms=models.CharField(max_length=120) #可疑物品描述
     kywplb=models.CharField(max_length=2) #可疑物品类别
     bgr=models.ForeignKey(Qyryjbxx,related_name='bgr_set') #报告人 关联从业人员信息
