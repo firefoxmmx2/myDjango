@@ -34,10 +34,10 @@ class Ljjbxx(models.Model):
     djxh=models.CharField(max_length=24,primary_key=True) #登记序号 主键
     jjr=models.ForeignKey(Rdrjbxx,related_name='jjr_set') #寄件人实体，关联寄件人收件人实体
     sjr=models.ForeignKey(Rdrjbxx,related_name="sjr_set") #收件人实体，关联寄件人收件人实体
-    ljr=models.ForeignKey(Qyryjbxx) #揽件人 （从业人员实体）
+    ljr=models.ForeignKey(Qyryjbxx,related_name='ljr_set') #揽件人 （从业人员实体）
     ljsj=models.DateField() #揽件时间 年月日 
     ljtbsj=models.DateField() #揽件填报时间 年月日 默认当前时间
-    ljtbr=models.ForeignKey(Qyryjbxx) #揽件填报人 关联从业人员实体 默认为当前用户
+    ljtbr=models.ForeignKey(Qyryjbxx,related_name='ljbtr_set') #揽件填报人 关联从业人员实体 默认为当前用户
 class Pjjbxx(models.Model):
     '''派件基本信息'''
     ljjbxx=models.ForeignKey(Ljjbxx) #派件关联的揽件信息 揽件实体
@@ -48,7 +48,6 @@ class Pjjbxx(models.Model):
     pjsj=models.DateField() #派件时间 年月日
     pjtbr=models.ForeignKey(Qyryjbxx,related_name="+") #派件填报人 关联从业人员实体
     pjtbsj=models.DateField() #派件填报时间 年月日
-
 class Kyjdwpxx(models.Model):
     '''可疑寄递物品信息'''
     kyywdjxh=models.CharField(max_length=24) #可疑业务登记序号 主键
