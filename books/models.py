@@ -24,12 +24,25 @@ class Author(models.Model):
         return u'%s %s' % (self.first_name, self.last_name)
     class Meta:
         ordering=['email']
+
+class BookMananger(models.Manager):
+	def title_count(self, keyword):
+		return self.filter(title__icontains=keyword).count()
+
+class DahlBookManager(models.Manager):
+    def get_query_set(self):
+        return super(DahlBookManager, self).get_query_set().filter(author="Roald Dahl")
+
 class Book(models.Model):
     title = models.CharField(max_length=100)
     authors = models.ManyToManyField(Author)
     publisher = models.ForeignKey(Publisher)
     publication_date = models.DateField(blank=True)
-    
+    num_pages = models.IntegerField(blank=True,null=True)
+    #objects = BookMananger()
+    objects = models.Manager()
+    dahl_objects = DahlBookManager()
+
     def __unicode__(self):
         return self.title
     class Meta:
